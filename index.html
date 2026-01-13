@@ -6,20 +6,34 @@
     <title>Ranked Spikeball</title>
 </head>
 <body>
+    <h1>RANKED SPIKEBALL - SEASON 1</h1>
+    <button></button>
+    <h3>PLAYERS - <span id="players"></span></h3>
 
-  <h1>PLAYERS - <span id="players"></span></h1>
 
-  <script>
-      if (localStorage.getItem('DATA') !== null) {
-        let users = JSON.parse(localStorage.getItem("DATA"));
-      } else {
-        let users = [];
-        localStorage.setItem('DATA', JSON.stringify(users));
-      }
-      let playerTEXT = document.getElementById("players");
-      playerTEXT.innerHTML = users;
-  </script>
+    <script>
 
-  
+        function addPlayer(){
+            playerName = prompt("Enter Name");
+            playerId = users.length;
+            playerElo = 0;
+            if (playerName !== null){
+                users.push([playerName, playerId, playerElo]);
+            }
+            
+        }
+        function updatePlayerText(){
+            let playerTEXT = document.getElementById("players");
+            playerTEXT.innerHTML = users;
+        }
+        
+        if (localStorage.getItem('DATA') !== null) {
+          let users = JSON.parse(localStorage.getItem("DATA"));
+        } else {
+          let users = [];
+          localStorage.setItem('DATA', JSON.stringify(users));
+        }
+        
+    </script>
 </body>
 </html>
