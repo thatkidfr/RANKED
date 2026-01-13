@@ -6,8 +6,20 @@
     <title>Ranked Spikeball</title>
 </head>
 <body>
-  
+
   <h1>PLAYERS - <span id="players"></span></h1>
+
+  <script>
+      if (localStorage.getItem('DATA') !== null) {
+        let users = JSON.parse(localStorage.getItem("DATA"));
+      } else {
+        let users = [];
+        localStorage.setItem('DATA', JSON.stringify(users));
+      }
+      let playerTEXT = document.getElementById("players");
+      playerTEXT.innerHTML = users;
+  </script>
+
   
 </body>
 </html>
