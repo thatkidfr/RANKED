@@ -7,13 +7,18 @@
 </head>
 <body>
     <h1>RANKED SPIKEBALL - SEASON 1</h1>
-    <button onclick="addPlayer();">ADD PLAYER</button>
+    <button onclick="addPlayer();saveData();">ADD PLAYER</button>
     <h3>PLAYERS - <span id="players"></span></h3>
+    <button onclick="resetData">RESET</button>
 
 
     <script>
         function saveData(){
             localStorage.setItem("DATA", JSON.stringify(users));
+        }
+        function resetData(){
+            localStorage.setItem("DATA", JSON.stringify([]));
+            users = [];
         }
         
         
