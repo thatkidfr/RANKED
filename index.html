@@ -12,7 +12,12 @@
 
 
     <script>
-
+        function saveData(){
+            localStorage.setItem("DATA", JSON.stringify(users));
+        }
+        
+        
+        
         function addPlayer(){
             playerName = prompt("Enter Name");
             playerId = users.length;
