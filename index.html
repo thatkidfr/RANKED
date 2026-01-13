@@ -26,9 +26,10 @@
         function addPlayer(){
             playerName = prompt("Enter Name");
             playerId = users.length;
-            playerElo = 0;
+            playerElo1v1 = 0;
+            playerElo2v2 = 0;
             if (playerName !== null){
-                users.push([playerName, playerId, playerElo]);
+                users.push([playerName, playerId, playerElo1v1, playerElo2v2]);
                 updatePlayerText();
             }
             
