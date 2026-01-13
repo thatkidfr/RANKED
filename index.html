@@ -17,6 +17,7 @@
             localStorage.setItem("DATA", JSON.stringify(users));
         }
         function resetData(){
+            alert(users);
             localStorage.setItem("DATA", JSON.stringify([]));
             users = [];
             updatePlayerText();
