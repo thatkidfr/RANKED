@@ -26,7 +26,8 @@
         }
         function updatePlayerText(){
             let playerTEXT = document.getElementById("players");
-            playerTEXT.innerHTML = users;
+            let playerList = users.map(user => user[0]).join(", ");
+            playerTEXT.innerHTML = playerList;
         }
 
 
