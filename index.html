@@ -9,7 +9,7 @@
     <h1>RANKED SPIKEBALL - SEASON 1</h1>
     <button onclick="addPlayer();saveData();">ADD PLAYER</button>
     <h3>PLAYERS - <span id="players"></span></h3>
-    <button onclick="resetData">RESET</button>
+    <button onclick="resetData();">RESET</button>
 
 
     <script>
@@ -19,6 +19,7 @@
         function resetData(){
             localStorage.setItem("DATA", JSON.stringify([]));
             users = [];
+            updatePlayerText();
         }
         
         
