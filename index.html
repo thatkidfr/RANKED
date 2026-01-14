@@ -36,14 +36,17 @@
             let e1 = 1 / (1 + 10**((player2Elo-player1Elo)/400));
             let e2 = 1 / (1 + 10**((player1Elo-player2Elo)/400));
 
-            let finalP1Elo = player1Elo + Math.round(K*(1-e1));
-            let finalP2Elo = player2Elo + Math.round(K*(0-e2));
+            let eloChange1 = Math.round(K*(1-e1));
+            let eloChange2 = Math.round(K*(0-e2));
+            
+            let finalP1Elo = player1Elo + eloChange1;
+            let finalP2Elo = player2Elo + eloChange2;
 
             if (finalP2Elo < 0){
                 finalP2Elo = 0;
             }
 
-            return [finalP1Elo, finalP2Elo];
+            return [finalP1Elo, finalP2Elo, eloChange1, eloChange2];
             
         }
 
@@ -62,11 +65,35 @@
 
             saveData();
             updatePlayerText();
+
+            let result = String(users[person1][0]) + ": " + String(finalElo[2]) + "<br>" + String(users[person2][0]) + ": " + String(finalElo[3]);
+            alert(result);
         }
 
 
         function rankedMatch2v2(){
-            alert();
+            let person1 = parseInt(prompt("Player ID of player #1 winner"));
+            let person2 = parseInt(prompt("Player ID of player #2 winner"));
+            let person3 = parseInt(prompt("Player ID of player #1 loser"));
+            let person4 = parseInt(prompt("Player ID of player #2 loser"));
+
+            let team1AverageElo = (users[person1][3] + users[person2][3])/2;
+            let team2AverageElo = (users[person3][3] + users[person4][3])/2;
+
+            let elo1 = calculateElo(users[person1][3], team2AverageElo, seasonMaxElo);
+            let elo2 = calculateElo(users[person2][3], team2AverageElo, seasonMaxElo);
+            let elo3 = calculateElo(team1AverageElo, users[person3][3], seasonMaxElo);
+            let elo4 = calculateElo(team1AverageElo, users[person4][3], seasonMaxElo);
+
+            users[person1][3] = elo1[0];
+            users[person2][3] = elo2[0];
+            users[person3][3] = elo3[1];
+            users[person4][3] = elo4[1];
+
+            let result = String(users[person1][0]) + ": " + String(elo1[2]) + "<br>" + String(users[person2][0]) + ": " + String(elo2[2]) + "<br>" + String(users[person3][0]) + ": " + String(elo3[3]) + "<br>" + String(users[person4][0]) + ": " + String(elo4[3]);
+            alert(result);
+            
+            
         }
         
         
