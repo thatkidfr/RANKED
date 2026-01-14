@@ -66,7 +66,7 @@
             saveData();
             updatePlayerText();
 
-            let result = String(users[person1][0]) + ": " + String(finalElo[2]) + "<br>" + String(users[person2][0]) + ": " + String(finalElo[3]);
+            let result = String(users[person1][0]) + ": " + String(finalElo[2]) + "\n" + String(users[person2][0]) + ": " + String(finalElo[3]);
             alert(result);
         }
 
@@ -90,7 +90,10 @@
             users[person3][3] = elo3[1];
             users[person4][3] = elo4[1];
 
-            let result = String(users[person1][0]) + ": " + String(elo1[2]) + "<br>" + String(users[person2][0]) + ": " + String(elo2[2]) + "<br>" + String(users[person3][0]) + ": " + String(elo3[3]) + "<br>" + String(users[person4][0]) + ": " + String(elo4[3]);
+            saveData();
+            updatePlayerText();
+            
+            let result = String(users[person1][0]) + ": " + String(elo1[2]) + "\n" + String(users[person2][0]) + ": " + String(elo2[2]) + "\n" + String(users[person3][0]) + ": " + String(elo3[3]) + "\n" + String(users[person4][0]) + ": " + String(elo4[3]);
             alert(result);
             
             
