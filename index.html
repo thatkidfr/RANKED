@@ -8,6 +8,7 @@
 <body>
     <h1>RANKED SPIKEBALL - SEASON 1</h1>
     <button onclick="rankedMatch1v1();">RANKED MATCH 1v1</button>
+    <br>
     <button onclick="addPlayer();saveData();">ADD PLAYER</button>
     <h3>PLAYERS - <span id="players"></span></h3>
     <button onclick="resetData();">RESET</button>
@@ -33,8 +34,11 @@
             let finalP1Elo = player1Elo + Math.round(K*(1-e1));
             let finalP2Elo = player2Elo + Math.round(K*(0-e2));
 
+            if (finalP2Elo < 0){
+                finalP2Elo = 0;
+            }
+
             return [finalP1Elo, finalP2Elo];
-            
             
         }
 
@@ -56,8 +60,8 @@
         function addPlayer(){
             playerName = prompt("Enter Name");
             playerId = users.length;
-            playerElo1v1 = 500;
-            playerElo2v2 = 500;
+            playerElo1v1 = 1000;
+            playerElo2v2 = 1000;
             if (playerName !== null){
                 users.push([playerName, playerId, playerElo1v1, playerElo2v2]);
                 updatePlayerText();
