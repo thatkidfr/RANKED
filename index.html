@@ -55,14 +55,18 @@
                 let kfact = 90-Math.floor(elo/25);
                 if (kfact < 10){kfact = 10;}
 
-                return kfact*3;
+                return kfact*2.5;
             }
 
             let kfact = 50
             if (elo < 1000){
-                kfact = Math.floor(elo/25)+10
+                kfact = Math.floor(elo/25)+10;
             }
-            return kfact*3
+            if (elo > 1000){
+                kfact = 90-Math.floor(elo/25);
+            }
+            if (kfact < 10){kfact = 10;}
+            return kfact*2.5;
         }
 
         function rankedMatch1v1(){
