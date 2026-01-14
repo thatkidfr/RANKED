@@ -21,7 +21,11 @@
             localStorage.setItem("DATA", JSON.stringify(users));
         }
         function resetData(){
-            
+
+            if (!confirm("ARE YOU SURE YOU WANT TO RESET?")){
+                return;
+            }
+            if (!confirm("FINAL WARNING")){return;}
             localStorage.setItem("DATA", JSON.stringify([]));
             users = [];
             updatePlayerText();
