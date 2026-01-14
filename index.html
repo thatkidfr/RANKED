@@ -36,8 +36,8 @@
             let e1 = 1 / (1 + 10**((player2Elo-player1Elo)/400));
             let e2 = 1 / (1 + 10**((player1Elo-player2Elo)/400));
 
-            let eloChange1 = Math.round(kFactor(player1Elo)*(1-e1));
-            let eloChange2 = Math.round(kFactor(player2Elo)*(0-e2));
+            let eloChange1 = Math.round(kFactor(player1Elo, 1)*(1-e1));
+            let eloChange2 = Math.round(kFactor(player2Elo, 0)*(0-e2));
             
             let finalP1Elo = player1Elo + eloChange1;
             let finalP2Elo = player2Elo + eloChange2;
@@ -50,13 +50,19 @@
             
         }
 
-        function kFactor(elo){
-            let kfact = 90-Math.floor(elo/25);
-            if (kfact < 10){kfact = 10;}
+        function kFactor(elo, winlose){
+            if (winlose === 1){
+                let kfact = 90-Math.floor(elo/25);
+                if (kfact < 10){kfact = 10;}
 
-            return kfact*3;
-            
-            
+                return kfact*3;
+            }
+
+            let kfact = 50
+            if (elo < 1000){
+                kfact = Math.floor(elo/25)+10
+            }
+            return kfact*3
         }
 
         function rankedMatch1v1(){
@@ -111,8 +117,8 @@
         function addPlayer(){
             playerName = prompt("Enter Name");
             playerId = users.length;
-            playerElo1v1 = 1000;
-            playerElo2v2 = 1000;
+            playerElo1v1 = 800;
+            playerElo2v2 = 800;
             if (playerName !== null){
                 users.push([playerName, playerId, playerElo1v1, playerElo2v2]);
                 updatePlayerText();
