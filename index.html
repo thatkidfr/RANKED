@@ -7,9 +7,11 @@
 </head>
 <body>
     <h1>RANKED SPIKEBALL - SEASON 1</h1>
+    <button onclick="rankedMatch1v1();">RANKED MATCH 1v1</button>
     <button onclick="addPlayer();saveData();">ADD PLAYER</button>
     <h3>PLAYERS - <span id="players"></span></h3>
     <button onclick="resetData();">RESET</button>
+    <button onclick="alert(users);">debug</button>
 
 
     <script>
@@ -17,19 +19,45 @@
             localStorage.setItem("DATA", JSON.stringify(users));
         }
         function resetData(){
-            alert(users);
+            
             localStorage.setItem("DATA", JSON.stringify([]));
             users = [];
             updatePlayerText();
         }
         
+        // Where player 1 is the winner
+        function calculateElo(player1Elo, player2Elo, K){
+            let e1 = 1 / (1 + 10**((player2Elo-player1Elo)/400));
+            let e2 = 1 / (1 + 10**((player1Elo-player2Elo)/400));
+
+            let finalP1Elo = player1Elo + Math.round(K*(1-e1));
+            let finalP2Elo = player2Elo + Math.round(K*(0-e2));
+
+            return [finalP1Elo, finalP2Elo];
+            
+            
+        }
+
+
+        function rankedMatch1v1(){
+            let person1 = parseInt(prompt("Player ID of winner"));
+            let person2 = parseInt(prompt("Player ID of loser"));
+
+            let elo1 = users[person1][2];
+            let elo2 = users[person2][2];
+
+            let finalElo = calculateElo(elo1, elo2, seasonMaxElo);
+
+            users[person1][2] = finalElo[0];
+            users[person2][2] = finalElo[1];
+        }
         
         
         function addPlayer(){
             playerName = prompt("Enter Name");
             playerId = users.length;
-            playerElo1v1 = 0;
-            playerElo2v2 = 0;
+            playerElo1v1 = 500;
+            playerElo2v2 = 500;
             if (playerName !== null){
                 users.push([playerName, playerId, playerElo1v1, playerElo2v2]);
                 updatePlayerText();
@@ -44,7 +72,7 @@
         }
 
 
-
+        let seasonMaxElo = 50;
         let users = [];
         if (localStorage.getItem('DATA') !== null) {
             users = JSON.parse(localStorage.getItem("DATA"));
